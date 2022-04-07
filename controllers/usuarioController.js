@@ -27,7 +27,7 @@ const registrar = async (req, res) => {
         })
 
         res.json({
-            msg: 'Usuario Creado Correctamente, Revisa tu Email para confirmar tu cuenta'
+            msg: 'Usuario Creado Correctamente, Revisa tu Email para confirmar tu cuenta (Revisa la bandeja SPAM)'
         });
     } catch (error) {
         
@@ -100,7 +100,7 @@ const olvidePassword = async (req, res) => {
             nombre: usuario.nombre,
             token: usuario.token
         })
-        res.json({msg: 'Hemos Enviado un email con las instrucciones'})
+        res.json({msg: 'Hemos Enviado un email con las instrucciones, (Revisa la bandeja SPAM)'})
         
     } catch (error) {
         console.log(error)
