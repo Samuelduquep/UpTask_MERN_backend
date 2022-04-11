@@ -17,20 +17,22 @@ const registrar = async (req, res) => {
     try {
         const usuario = new Usuario(req.body)
         usuario.token = generarId();
-        await usuario.save();
 
         //Enviar el Email de confirmacion 
+
         emailRegistro({
             email: usuario.email,
             nombre: usuario.nombre,
             token: usuario.token
         })
+        
+        await usuario.save();
 
         res.json({
             msg: 'Usuario Creado Correctamente, Revisa tu Email para confirmar tu cuenta (Revisa la bandeja SPAM)'
         });
     } catch (error) {
-        
+        console.log(error)
     }   
 }
 
@@ -94,12 +96,15 @@ const olvidePassword = async (req, res) => {
     
     try {
         usuario.token = generarId()
+      
         await usuario.save()
+
         emailRecuperar({
             email: usuario.email,
             nombre: usuario.nombre,
             token: usuario.token
         })
+       
         res.json({msg: 'Hemos Enviado un email con las instrucciones, (Revisa la bandeja SPAM)'})
         
     } catch (error) {
